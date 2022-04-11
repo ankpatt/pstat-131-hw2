@@ -24,11 +24,12 @@ abalone2
 Assess and describe the distribution of age.
 
 ```{r}
-
-ggplot(abalone,aes(x = age)) +
+ggplot(abalone2,aes(x = age)) +
   geom_histogram(bins = 30) 
  
 ```
+
+
 We assess the distribution with a histogram. We can see by analyzing the histogram that the distribution of the age, shows us the majorit of the abalones are between the ages of 5-25. We know this by seeing the indicated count within the age range, where there are few to none abalones marked to be ages 5 below, or 25 over. 
 
 
