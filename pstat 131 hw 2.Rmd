@@ -13,24 +13,18 @@ knitr::opts_chunk$set(echo = TRUE)
 library(ggplot2)
 library(tidyverse)
 library(tidymodels)
-library(corrplot)
-library(ggthemes)
-library(parsnip)
-library(recipes)
-library(workflows)
-library(modeldata)
 tidymodels_prefer()
 
 abalone<- read_csv('/Users/ankitapattnaik/Downloads/abalone.csv')
-colnames(abalone)<-c('sex','length','diameter','height','whole_weight','shucked_weight', 'viscera_weight', 'shell_weight', 'rings')
-abalone
+abalone2 <-mutate(abalone, age = 1.5 + rings)
+abalone2
 ```
 
 1. Your goal is to predict abalone age, which is calculated as the number of rings plus 1.5. Notice there currently is no age variable in the data set. Add age to the data set.
 Assess and describe the distribution of age.
 
 ```{r}
-abalone$age <- (abalone$rings+1.5)
+
 ggplot(abalone,aes(x = age)) +
   geom_histogram(bins = 30) 
  
@@ -46,10 +40,10 @@ Remember that you’ll need to set a seed at the beginning of the document to re
 ```{r}
 set.seed(3435)
 
-abalone_split<- initial_split(abalone, prop = 0.80,
+abalone_split <- initial_split(abalone2, prop = 0.80,
                                 strata = age)
-abalone_train<- training(abalone_split)
-abalone_test<- testing(abalone_split)
+abalone_train <- training(abalone_split)
+abalone_test <- testing(abalone_split)
 ```
 
 3. Using the training data, create a recipe predicting the outcome variable, age, with all other predictor variables. Note that you should not include rings to predict age. Explain why you shouldn’t use rings to predict age.
@@ -65,10 +59,18 @@ Steps for your recipe:
    scale all predictors.
    
 ```{r}
-abalone_recipe <- recipe(age ~ sex + length + diameter + height + whole_weight + shucked_weight + viscera_weight + shell_weight, data = abalone_train) %>% step_dummy(all_nominal_predictors()) %>%
-  step_interact(terms= ~ starts_with("type"):shucked_weight) %>%
-  step_interact(terms= ~ longest_shell:diameter) %>%
-  step_interact(terms= ~ shucked_weight:shell_weight) %>%  step_scale(all_predictors()) %>% step_center(all_predictors())
+
+abalone_recipe <- recipe(age ~ type + longest_shell + diameter + 
+                           height + whole_weight + shucked_weight + 
+                           viscera_weight, shell_weight, 
+                         data = abalone_train) %>%
+  step_dummy(all_nominal_predictors()) %>% 
+  step_interact(terms = ~ starts_with("type"):shucked_weight) %>%
+  step_interact( ~ longest_shell:diameter) %>%
+  step_interact(~ shucked_weight:shell_weight) %>%
+  step_center(all_predictors()) %>%
+  step_scale(all_predictors())
+abalone_recipe
 
 ```
 
@@ -109,10 +111,10 @@ c) Finally, apply your metric set to the tibble, report the results, and interpr
 
 ```{r}
 abalone_metrics <- metric_set(rmse, rsq, mae)
-abalone_train_res <- predict(lm_fit, new_data = diamonds_train %>% select(-age))
+abalone_train_res <- predict(lm_fit, new_data = abalone_train %>% select(-age, -rings))
 abalone_train_res <- bind_cols(abalone_train_res, abalone_train %>% select(age))
 rmse(abalone_train_res, truth = age, estimate = .pred)
 abalone_metrics(abalone_train_res, truth = age, 
                 estimate = .pred)
-## 0.55, 2.1442954, 1.54429
+
 ```
