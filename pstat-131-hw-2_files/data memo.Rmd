@@ -1,0 +1,106 @@
+---
+title: "data memo"
+output:
+  html_document: default
+  pdf_document: default
+---
+
+**An overview of your dataset:** my spotify data
+
+**What does it include?**
+
+- Playlists
+
+- Search queries
+
+- Streaming history for the past year
+
+- A list of items saved in your library
+
+- The number of followers you have and the number of accounts you follow
+
+- Payment and subscription data
+
+- User data
+
+- Inferences
+
+- Voice input
+
+- Podcast interactivity
+
+- Family Plan data
+
+- Spotify for Artists data
+
+
+
+**Where and how will you be obtaining it? Include the link and source.**
+
+- Obtained directly through Spotify by requesting for data in my “privacy settings”. I requested it a few days ago, and it may take up to 30 days to send my data (haven’t received it yet) but if there isn’t enough information to conduct thorough studies, I will use ​​https://developer.spotify.com/documentation/web-api/ for another similar type of project based off other users data. 
+
+
+
+**About how many observations? How many predictors?**
+
+- Have not received the data yet. 
+
+
+
+**What types of variables will you be working with?**
+
+
+- Possibly song titles, genres, minutes listened to, etc. 
+
+
+
+**What variable(s) are you interested in predicting? What question(s) are you interested in answering?**
+
+
+- I am interested in predicting how long I listen to a song depending on the genre. I skip songs a lot so I am curious to see how long certain songs maintain my interest and which genre they are. Maybe dive into sub-genre and artist. 
+
+
+
+**Name your response/outcome variable(s) and briefly describe it/them.**
+
+
+- Response: most listened to genre in minutes.
+
+
+
+**Will these questions be best answered with a classification or regression approach?**
+
+
+- Maybe through a classification approach because if it is not my most listened to genre, I would not listen to it. 
+
+
+
+**Which predictors do you think will be especially useful?**
+
+
+- The variety of genres I listen to and how related they are in terms of sound. I am not sure about my predictors though I have not received my dataset. 
+
+
+
+**Is the goal of your model descriptive, predictive, inferential, or a combination? Explain.**
+
+
+- I think a mix of descriptive and inferential because we can look at the data and infer what I will probably listen to. 
+
+
+
+**Your proposed project timeline: 
+When do you plan on having your data set loaded, beginning your exploratory data analysis, etc?
+Provide a general timeline for the rest of the quarter.**
+
+
+- Hopefully by the end of this week, simultaneously doing hw3. I hope yo organize my data and figure out the response and predictors, the goals of my project and divide into categories of what I want to do with my data. Hopefully I have enough information to work with, orelse I will change my topic. By working on it this week I will be able to determine how useful my Spotify data will be for this project. 
+If my data does not come in time by the end of this week I will use data from other users through the API website provided, and consult professor during office hours on Friday. 
+
+
+
+**Any questions or concerns
+Are there any problems or difficult aspects of the project you anticipate?**
+
+- I am just having a hard time choosing a topic I can maintain consistency on. I am scared I will lose interest in my topic if I don’t choose one as interesting. Hopefully I am able to work on it this week and figure it out! 
+

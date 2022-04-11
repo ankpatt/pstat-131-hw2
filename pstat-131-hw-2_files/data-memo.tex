@@ -1,0 +1,211 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  pdftitle={data memo},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+
+\title{data memo}
+\author{}
+\date{\vspace{-2.5em}}
+
+\begin{document}
+\maketitle
+
+\textbf{An overview of your dataset:} my spotify data
+
+\textbf{What does it include?}
+
+\begin{itemize}
+\item
+  Playlists
+\item
+  Search queries
+\item
+  Streaming history for the past year
+\item
+  A list of items saved in your library
+\item
+  The number of followers you have and the number of accounts you follow
+\item
+  Payment and subscription data
+\item
+  User data
+\item
+  Inferences
+\item
+  Voice input
+\item
+  Podcast interactivity
+\item
+  Family Plan data
+\item
+  Spotify for Artists data
+\end{itemize}
+
+\textbf{Where and how will you be obtaining it? Include the link and
+source.}
+
+\begin{itemize}
+\tightlist
+\item
+  Obtained directly through Spotify by requesting for data in my
+  ``privacy settings''. I requested it a few days ago, and it may take
+  up to 30 days to send my data (haven't received it yet) but if there
+  isn't enough information to conduct thorough studies, I will use
+  ​​\url{https://developer.spotify.com/documentation/web-api/} for
+  another similar type of project based off other users data.
+\end{itemize}
+
+\textbf{About how many observations? How many predictors?}
+
+\begin{itemize}
+\tightlist
+\item
+  Have not received the data yet.
+\end{itemize}
+
+\textbf{What types of variables will you be working with?}
+
+\begin{itemize}
+\tightlist
+\item
+  Possibly song titles, genres, minutes listened to, etc.
+\end{itemize}
+
+\textbf{What variable(s) are you interested in predicting? What
+question(s) are you interested in answering?}
+
+\begin{itemize}
+\tightlist
+\item
+  I am interested in predicting how long I listen to a song depending on
+  the genre. I skip songs a lot so I am curious to see how long certain
+  songs maintain my interest and which genre they are. Maybe dive into
+  sub-genre and artist.
+\end{itemize}
+
+\textbf{Name your response/outcome variable(s) and briefly describe
+it/them.}
+
+\begin{itemize}
+\tightlist
+\item
+  Response: most listened to genre in minutes.
+\end{itemize}
+
+\textbf{Will these questions be best answered with a classification or
+regression approach?}
+
+\begin{itemize}
+\tightlist
+\item
+  Maybe through a classification approach because if it is not my most
+  listened to genre, I would not listen to it.
+\end{itemize}
+
+\textbf{Which predictors do you think will be especially useful?}
+
+\begin{itemize}
+\tightlist
+\item
+  The variety of genres I listen to and how related they are in terms of
+  sound. I am not sure about my predictors though I have not received my
+  dataset.
+\end{itemize}
+
+\textbf{Is the goal of your model descriptive, predictive, inferential,
+or a combination? Explain.}
+
+\begin{itemize}
+\tightlist
+\item
+  I think a mix of descriptive and inferential because we can look at
+  the data and infer what I will probably listen to.
+\end{itemize}
+
+\textbf{Your proposed project timeline: When do you plan on having your
+data set loaded, beginning your exploratory data analysis, etc? Provide
+a general timeline for the rest of the quarter.}
+
+\begin{itemize}
+\tightlist
+\item
+  Hopefully by the end of this week, simultaneously doing hw3. I hope yo
+  organize my data and figure out the response and predictors, the goals
+  of my project and divide into categories of what I want to do with my
+  data. Hopefully I have enough information to work with, orelse I will
+  change my topic. By working on it this week I will be able to
+  determine how useful my Spotify data will be for this project. If my
+  data does not come in time by the end of this week I will use data
+  from other users through the API website provided, and consult
+  professor during office hours on Friday.
+\end{itemize}
+
+\textbf{Any questions or concerns Are there any problems or difficult
+aspects of the project you anticipate?}
+
+\begin{itemize}
+\tightlist
+\item
+  I am just having a hard time choosing a topic I can maintain
+  consistency on. I am scared I will lose interest in my topic if I
+  don't choose one as interesting. Hopefully I am able to work on it
+  this week and figure it out!
+\end{itemize}
+
+\end{document}

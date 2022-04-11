@@ -1,17 +1,13 @@
 ---
 title: "pstat 131 hw2"
-output: html_document
+output:
+  html_document: default
+  pdf_document: default
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
-
-## R Markdown
-
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
-
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
 
 ```{r}
 library(ggplot2)
@@ -25,7 +21,7 @@ library(workflows)
 library(modeldata)
 tidymodels_prefer()
 
-abalone<- read_csv('/Users/ankitapattnaik/Downloads/abalone.data', col_names =1)
+abalone<- read_csv('/Users/ankitapattnaik/Downloads/abalone.csv')
 colnames(abalone)<-c('sex','length','diameter','height','whole_weight','shucked_weight', 'viscera_weight', 'shell_weight', 'rings')
 abalone
 ```
@@ -50,17 +46,17 @@ Remember that you’ll need to set a seed at the beginning of the document to re
 ```{r}
 set.seed(3435)
 
-abalone_split <- initial_split(abalone, prop = 0.80,
+abalone_split<- initial_split(abalone, prop = 0.80,
                                 strata = age)
-abalone_train <- training(abalone_split)
-abalone_test <- testing(abalone_split)
+abalone_train<- training(abalone_split)
+abalone_test<- testing(abalone_split)
 ```
 
 3. Using the training data, create a recipe predicting the outcome variable, age, with all other predictor variables. Note that you should not include rings to predict age. Explain why you shouldn’t use rings to predict age.
 
 Steps for your recipe:
 
-1. dummy code any categorical predictors
+   dummy code any categorical predictors
    create interactions between
    type and shucked_weight,
    longest_shell and diameter,
@@ -69,11 +65,10 @@ Steps for your recipe:
    scale all predictors.
    
 ```{r}
-abalone_recipe <- recipe(age ~ ., data = abalone_train %>% select(-rings))%>% step_dummy(all_nominal_predictors())%>%
+abalone_recipe <- recipe(age ~ sex + length + diameter + height + whole_weight + shucked_weight + viscera_weight + shell_weight, data = abalone_train) %>% step_dummy(all_nominal_predictors()) %>%
   step_interact(terms= ~ starts_with("type"):shucked_weight) %>%
   step_interact(terms= ~ longest_shell:diameter) %>%
-  step_interact(terms= ~ longest_shell:diameter) %>%
-  step_interact(terms= ~ shucked_weight:shell_weight) %>% step_normalize() %>% step_scale() %>% step_center(all_predictors())
+  step_interact(terms= ~ shucked_weight:shell_weight) %>%  step_scale(all_predictors()) %>% step_center(all_predictors())
 
 ```
 
@@ -99,11 +94,10 @@ lm_wflow <- workflow() %>%
 6. Use your fit() object to predict the age of a hypothetical female abalone with longest_shell = 0.50, diameter = 0.10, height = 0.30, whole_weight = 4, shucked_weight = 1, viscera_weight = 2, shell_weight = 1.
 
 ```{r}
-lm_fit <- fit(lm_wflow, abalone_train)
 
-abalone_predict <- data.frame(type = 'F', longest_shell = 0.50, diameter = 0.10, height = 0.30, whole_weight = 1, viscero_weight = 2, shell_weight=1)
-predict(lm_fit, new_Data = abalone_predict)
-
+lm_fit<- fit(lm_wflow, abalone_train)
+predicted_abalone <- predict(lm_fit, data.frame(type = 'F', longest_shell = 0.50, diameter = 0.10, height = 0.30, whole_weight = 4, shucked_weight = 1, viscera_weight = 2, shell_weight = 1))
+predicted_abalone
 
 ```
 
